@@ -169,11 +169,6 @@ function ShortsReviewTab() {
                 <span style={{ fontSize: 10, color: T.white }}>{fmtNum(r.views)}</span>
               </div>
             </div>
-            <div style={{ position: 'absolute', top: 5, right: 5 }}>
-              <svg width="10" height="10" viewBox="0 0 24 24" fill={T.white}>
-                <polygon points="5,3 19,12 5,21"/>
-              </svg>
-            </div>
           </button>
         ))}
       </div>

@@ -58,10 +58,9 @@ export default function HighlightSection() {
             <div style={{
               position: 'absolute', top: '50%', left: '50%',
               transform: 'translate(-50%, -50%)',
-              background: 'rgba(0,0,0,0.45)', borderRadius: 6,
               padding: '4px 10px', width: '85%', textAlign: 'center',
             }}>
-              <span style={{ color: T.white, fontSize: 12, fontWeight: 700, whiteSpace: 'nowrap' }}>{r.caption}</span>
+              <span style={{ color: T.white, fontSize: 12, fontWeight: 700, lineHeight: 1.4, textShadow: '0 1px 4px rgba(0,0,0,0.7)' }}>{r.caption}</span>
             </div>
 
             {/* 하단 오버레이 */}
@@ -82,17 +81,6 @@ export default function HighlightSection() {
                 </svg>
                 <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.8)' }}>{fmtNum(r.likes)}</span>
               </div>
-            </div>
-
-            {/* 재생 아이콘 */}
-            <div style={{
-              position: 'absolute', top: 8, right: 8,
-              background: 'rgba(0,0,0,0.4)', borderRadius: '50%',
-              width: 24, height: 24, display: 'flex', alignItems: 'center', justifyContent: 'center',
-            }}>
-              <svg width="10" height="10" viewBox="0 0 24 24" fill={T.white}>
-                <polygon points="5,3 19,12 5,21"/>
-              </svg>
             </div>
 
             {/* 순위 뱃지 */}

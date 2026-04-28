@@ -40,11 +40,11 @@ export default function VideoCard({ review, height }) {
       <div style={{
         position: 'absolute', top: '50%', left: '50%',
         transform: 'translate(-50%, -50%)',
-        background: 'rgba(0,0,0,0.45)', backdropFilter: 'blur(2px)',
-        padding: '8px 20px', borderRadius: 8,
+        padding: '8px 20px',
         pointerEvents: 'none',
+        width: '80%', textAlign: 'center',
       }}>
-        <span style={{ color: T.white, fontSize: 18, fontWeight: 700, letterSpacing: -0.3, whiteSpace: 'nowrap' }}>
+        <span style={{ color: T.white, fontSize: 18, fontWeight: 700, letterSpacing: -0.3, lineHeight: 1.4, textShadow: '0 1px 6px rgba(0,0,0,0.7)' }}>
           {review.caption}
         </span>
       </div>
