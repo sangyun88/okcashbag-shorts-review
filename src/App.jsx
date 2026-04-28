@@ -61,8 +61,8 @@ export default function App() {
         {activeScreen === 'upload'   && <ScreenUpload />}
       </div>
 
-      {/* 하단 내비게이션 (업로드 화면 제외) */}
-      {!isUpload && <BottomNav />}
+      {/* 하단 내비게이션 (피드·업로드 화면 제외) */}
+      {!isFeed && !isUpload && <BottomNav />}
 
       {/* 신고 모달 */}
       <ReportModal />
