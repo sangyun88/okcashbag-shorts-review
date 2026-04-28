@@ -44,7 +44,7 @@ export default function VideoCard({ review, height }) {
         pointerEvents: 'none',
         width: '80%', textAlign: 'center',
       }}>
-        <span style={{ color: T.white, fontSize: 18, fontWeight: 700, letterSpacing: -0.3, lineHeight: 1.4, textShadow: '0 1px 6px rgba(0,0,0,0.7)' }}>
+        <span style={{ color: T.white, fontSize: 18, fontWeight: 700, letterSpacing: -0.3, lineHeight: 1.4 }}>
           {review.caption}
         </span>
       </div>
