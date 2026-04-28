@@ -36,7 +36,7 @@ export default function App() {
       ref={shellRef}
       style={{
         display: 'flex', flexDirection: 'column',
-        height: '100dvh',
+        height: '100%',
         background: T.white,
         position: 'relative', overflow: 'hidden',
         maxWidth: 480, margin: '0 auto',
