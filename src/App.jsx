@@ -25,8 +25,9 @@ export default function App() {
   }
 
   function getBackTarget() {
+    if (activeScreen === 'feed')    return 'shopping';
     if (activeScreen === 'product') return 'shopping';
-    if (activeScreen === 'upload') return 'product';
+    if (activeScreen === 'upload')  return 'product';
     return null;
   }
 
@@ -36,19 +37,20 @@ export default function App() {
       style={{
         display: 'flex', flexDirection: 'column',
         height: '100dvh',
-        background: isFeed ? '#000' : T.white,
+        background: T.white,
         position: 'relative', overflow: 'hidden',
         maxWidth: 480, margin: '0 auto',
       }}
     >
       {/* 상태바 */}
-      <StatusBar dark={isFeed} />
+      <StatusBar dark={false} />
 
       {/* 탑바 */}
       <TopAppBar
-        dark={isFeed}
+        dark={false}
         title={getTitle()}
         onBack={getBackTarget() ? () => setScreen(getBackTarget()) : undefined}
+        backOnly={isFeed}
       />
 
       {/* 메인 콘텐츠 */}

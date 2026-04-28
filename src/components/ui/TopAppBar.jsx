@@ -1,10 +1,26 @@
 import { T } from '../../tokens';
 import { useShortsStore } from '../../store/shortsStore';
 
-export default function TopAppBar({ title, dark = false, onBack }) {
+export default function TopAppBar({ title, dark = false, onBack, backOnly = false }) {
   const myPoints = useShortsStore((s) => s.myPoints);
   const c  = dark ? T.white : T.black;
   const bg = dark ? 'transparent' : T.white;
+
+  if (backOnly) {
+    return (
+      <div style={{
+        height: 48, background: T.white,
+        display: 'flex', alignItems: 'center', padding: '0 8px', flexShrink: 0,
+        borderBottom: `0.5px solid ${T.gray100}`, position: 'relative', zIndex: 10,
+      }}>
+        <button onClick={onBack} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 8 }}>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M15 18L9 12L15 6" stroke={T.black} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div style={{
