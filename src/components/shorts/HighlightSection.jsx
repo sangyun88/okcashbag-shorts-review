@@ -10,7 +10,6 @@ function fmtNum(n) {
 
 export default function HighlightSection() {
   const { setScreen, setCurrentIndex } = useShortsStore();
-  const top3 = REVIEWS.slice(0, 3);
 
   return (
     <div style={{ background: T.white, marginBottom: 8 }}>
@@ -39,19 +38,20 @@ export default function HighlightSection() {
         </button>
       </div>
 
-      {/* 썸네일 카드 가로 스크롤 */}
+      {/* 썸네일 카드 가로 스와이프 */}
       <div style={{
         display: 'flex', gap: 10, padding: '0 14px 14px',
         overflowX: 'auto', msOverflowStyle: 'none', scrollbarWidth: 'none',
+        scrollSnapType: 'x mandatory',
       }} className="scrollbar-hide">
-        {top3.map((r, i) => (
+        {REVIEWS.map((r, i) => (
           <button key={r.id} onClick={() => { setCurrentIndex(i); setScreen('feed'); }} style={{
             flexShrink: 0, width: 130, borderRadius: 12, overflow: 'hidden',
             background: r.gradient, border: 'none', cursor: 'pointer', padding: 0,
             position: 'relative', aspectRatio: '9/16',
             boxShadow: '0 2px 12px rgba(0,0,0,0.15)',
+            scrollSnapAlign: 'start',
           }}>
-            {/* 그라디언트 배경 */}
             <div style={{ position: 'absolute', inset: 0, background: r.gradient }} />
 
             {/* 자막 */}
@@ -60,7 +60,7 @@ export default function HighlightSection() {
               transform: 'translate(-50%, -50%)',
               padding: '4px 10px', width: '85%', textAlign: 'center',
             }}>
-              <span style={{ color: T.white, fontSize: 12, fontWeight: 700, lineHeight: 1.4, textShadow: '0 1px 4px rgba(0,0,0,0.7)' }}>{r.caption}</span>
+              <span style={{ color: T.white, fontSize: 12, fontWeight: 500 }}>{r.caption}</span>
             </div>
 
             {/* 하단 오버레이 */}
@@ -81,36 +81,8 @@ export default function HighlightSection() {
                 <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.8)' }}>{fmtNum(r.likes)}</span>
               </div>
             </div>
-
-            {/* 순위 뱃지 */}
-            {i < 3 && (
-              <div style={{
-                position: 'absolute', top: 8, left: 8,
-                background: i === 0 ? T.gold : i === 1 ? T.gray300 : '#cd7f32',
-                borderRadius: 4, width: 18, height: 18,
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-              }}>
-                <span style={{ fontSize: 10, fontWeight: 900, color: T.white }}>{i + 1}</span>
-              </div>
-            )}
           </button>
         ))}
-
-        {/* 더보기 카드 */}
-        <button onClick={() => setScreen('feed')} style={{
-          flexShrink: 0, width: 130, borderRadius: 12,
-          background: T.gray50, border: `1px dashed ${T.gray200}`,
-          cursor: 'pointer', display: 'flex', flexDirection: 'column',
-          alignItems: 'center', justifyContent: 'center', gap: 8,
-          aspectRatio: '9/16',
-        }}>
-          <div style={{ width: 36, height: 36, borderRadius: '50%', background: T.gray100, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-              <path d="M9 18L15 12L9 6" stroke={T.gray400} strokeWidth="2" strokeLinecap="round"/>
-            </svg>
-          </div>
-          <span style={{ fontSize: 12, color: T.gray500, fontWeight: 600 }}>전체 보기</span>
-        </button>
       </div>
     </div>
   );
