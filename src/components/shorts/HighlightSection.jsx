@@ -42,7 +42,7 @@ export default function HighlightSection() {
       <div style={{
         display: 'flex', gap: 10, padding: '0 14px 14px',
         overflowX: 'auto', msOverflowStyle: 'none', scrollbarWidth: 'none',
-        scrollSnapType: 'x mandatory',
+        scrollSnapType: 'x mandatory', scrollPaddingLeft: 14,
       }} className="scrollbar-hide">
         {REVIEWS.map((r, i) => (
           <button key={r.id} onClick={() => { setCurrentIndex(i); setScreen('feed'); }} style={{
