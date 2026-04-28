@@ -39,7 +39,6 @@ export default function App() {
         height: '100%',
         background: T.white,
         position: 'relative', overflow: 'hidden',
-        maxWidth: 480, margin: '0 auto',
       }}
     >
       {/* 상태바 */}

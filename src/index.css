@@ -6,24 +6,28 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-html {
+html, body {
+  margin: 0;
+  padding: 0;
   height: 100%;
   overflow: hidden;
+  background: #e0e0e0;
 }
 
 body {
-  margin: 0 auto;
   font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', sans-serif;
-  background: #f4f4f4;
-  max-width: 480px;
-  height: 100%;
-  overflow: hidden;
+  width: 393px;
+  margin: 0 auto;
 }
 
 #root {
-  height: 100%;
+  width: 393px;
+  height: 100svh;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
+  margin: 0 auto;
+  background: #fff;
 }
 
 .scrollbar-hide::-webkit-scrollbar { display: none; }
