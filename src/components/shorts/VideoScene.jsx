@@ -142,36 +142,6 @@ export default function VideoScene({ reviewId }) {
         }} />
       ))}
 
-      {/* 이모지 */}
-      <div style={{
-        position: 'absolute', top: scene.emojiTop, left: '50%',
-        transform: 'translateX(-50%)',
-        fontSize: 88, lineHeight: 1,
-        animation: 'iconPulse 3s ease-in-out infinite',
-        userSelect: 'none', pointerEvents: 'none',
-        filter: 'drop-shadow(0 8px 24px rgba(0,0,0,0.5))',
-      }}>
-        {scene.emoji}
-      </div>
-
-      {/* 파티클 */}
-      {scene.particles === 'steam' && STEAM_POSITIONS.map((p, i) => (
-        <div key={i} style={{
-          position: 'absolute', bottom: '38%', left: p.left,
-          width: 6, height: 28, borderRadius: 9999,
-          background: scene.particleColor,
-          filter: 'blur(3px)',
-          animation: `particleRise ${p.dur} ease-out ${p.delay} infinite`,
-        }} />
-      ))}
-      {scene.particles === 'sparkle' && SPARKLE_POSITIONS.map((p, i) => (
-        <div key={i} style={{
-          position: 'absolute', top: p.top, left: p.left,
-          width: p.size, height: p.size, borderRadius: '50%',
-          background: scene.particleColor,
-          animation: `sparkle ${p.dur} ease-in-out ${p.delay} infinite`,
-        }} />
-      ))}
     </div>
   );
 }
