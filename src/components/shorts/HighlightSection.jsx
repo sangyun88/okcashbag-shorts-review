@@ -69,8 +69,7 @@ export default function HighlightSection() {
               background: 'linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%)',
               padding: '24px 8px 8px',
             }}>
-              <p style={{ margin: 0, fontSize: 11, fontWeight: 600, color: T.white, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{r.product.brand}</p>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginTop: 3 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                 <svg width="11" height="11" viewBox="0 0 24 24" fill="none">
                   <path d="M1 12C1 12 5 4 12 4C19 4 23 12 23 12C23 12 19 20 12 20C5 20 1 12 1 12Z" stroke="rgba(255,255,255,0.7)" strokeWidth="2"/>
                   <circle cx="12" cy="12" r="3" stroke="rgba(255,255,255,0.7)" strokeWidth="2"/>
