@@ -1,35 +1,31 @@
 export const T = {
   white:   '#FFFFFF',
   black:   '#000000',
-  gray50:  '#F4F4F4',
-  gray100: '#E8E8EA',
-  gray200: '#D9D9D9',
-  gray300: '#B1B1B1',
-  gray400: '#9A9AA3',
-  gray500: '#868686',
-  gray600: '#626262',
-  gray700: '#555555',
-  gray800: '#333333',
-  gray900: '#181818',
 
-  orange:       '#E29C63',
-  gold:         '#FFD04E',
+  // Airbnb-based neutral scale
+  gray50:  '#F7F7F7',
+  gray100: '#EBEBEB',
+  gray200: '#DDDDDD',
+  gray300: '#B0B0B0',
+  gray400: '#717171',
+  gray500: '#484848',
+  gray600: '#383838',
+  gray700: '#333333',
+  gray800: '#222222',
+  gray900: '#222222',
 
-  purple:       '#6C40F0',
-  purpleDark:   '#4B348A',
+  // Brand — Airbnb coral
+  ocbRed:  '#FF5A5F',
+  gold:    '#FFD04E',
 
-  navy:      '#1E2032',
-  navyLight: '#2D2F43',
-
-  neon:   '#E0FE4C',
-  red:    '#FF1919',
-  hot:    '#FE0955',
-  pink:   '#FF0095',
-
-  ocbRed:  '#E8003D',
-
-  gradTimer: 'linear-gradient(to right, #AA23E9, #FF427D)',
+  // Gradients
+  brandGrad:  'linear-gradient(135deg, #E61E4D, #E31C5F, #D70466)',
+  gradTimer:  'linear-gradient(to right, #E61E4D, #D70466)',
   gradShorts: 'linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.85) 100%)',
+
+  // Shadows
+  shadowCard:  '0 1px 2px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.05)',
+  shadowPanel: '0 6px 16px rgba(0,0,0,0.12)',
 };
 
 export const R = {
@@ -37,7 +33,8 @@ export const R = {
   xs:   4,
   sm:   8,
   md:   12,
-  lg:   20,
+  lg:   14,
+  xl:   16,
   full: 9999,
 };
 

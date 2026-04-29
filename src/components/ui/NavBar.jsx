@@ -14,10 +14,10 @@ export default function NavBar({ active, onTab }) {
         return (
           <button key={tab} onClick={() => onTab(tab)} style={{
             flexShrink: 0, background: 'none', border: 'none', cursor: 'pointer',
-            padding: '12px 16px', fontSize: 14, fontWeight: on ? 700 : 400,
-            color: on ? T.gray900 : T.gray400,
-            borderBottom: on ? `2px solid ${T.gray900}` : '2px solid transparent',
-            fontFamily: 'inherit', whiteSpace: 'nowrap',
+            padding: '13px 16px', fontSize: 13, fontWeight: on ? 700 : 500,
+            color: on ? T.gray800 : T.gray400,
+            borderBottom: on ? `2px solid ${T.gray800}` : '2px solid transparent',
+            fontFamily: 'inherit', whiteSpace: 'nowrap', letterSpacing: -0.1,
           }}>
             {tab}
           </button>

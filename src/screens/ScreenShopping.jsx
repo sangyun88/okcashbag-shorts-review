@@ -6,7 +6,7 @@ import { useShortsStore } from '../store/shortsStore';
 
 const BANNERS = [
   { bg: 'linear-gradient(135deg, #1a1a2e 0%, #2d1b69 50%, #11998e 100%)', title: '쇼핑 특가\n오늘만 이 가격', sub: '최대 30% 할인', cta: '지금 쇼핑하기' },
-  { bg: 'linear-gradient(135deg, #E8003D 0%, #ff6b35 100%)', title: '숏츠리뷰 이벤트\n지금 작성하면 +50P', sub: '구매 후 5초 영상으로 포인트 받기', cta: '리뷰 작성하기', action: 'upload' },
+  { bg: 'linear-gradient(135deg, #E61E4D 0%, #D70466 100%)', title: '숏츠리뷰 이벤트\n지금 작성하면 +50P', sub: '구매 후 5초 영상으로 포인트 받기', cta: '리뷰 작성하기', action: 'upload' },
   { bg: 'linear-gradient(135deg, #2c3e50 0%, #3498db 100%)', title: '공동구매\n함께 사면 더 싸게', sub: '기프티콘 최대 40% 할인', cta: '공동구매 참여하기' },
 ];
 
@@ -34,22 +34,24 @@ export default function ScreenShopping() {
       {/* 배너 */}
       <div style={{ position: 'relative', overflow: 'hidden' }}>
         <div style={{
-          height: 200,
+          height: 196,
           background: BANNERS[bannerIdx].bg,
           display: 'flex', flexDirection: 'column',
           alignItems: 'center', justifyContent: 'center',
           padding: '0 24px', textAlign: 'center',
           transition: 'background 0.3s',
         }}>
-          <p style={{ color: T.white, fontSize: 22, fontWeight: 800, lineHeight: 1.3, whiteSpace: 'pre-line', marginBottom: 8 }}>
+          <p style={{ color: T.white, fontSize: 22, fontWeight: 800, lineHeight: 1.3, whiteSpace: 'pre-line', marginBottom: 6, letterSpacing: -0.5 }}>
             {BANNERS[bannerIdx].title}
           </p>
-          <p style={{ color: 'rgba(255,255,255,0.75)', fontSize: 13, marginBottom: 16 }}>{BANNERS[bannerIdx].sub}</p>
+          <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: 12, fontWeight: 500, marginBottom: 16 }}>{BANNERS[bannerIdx].sub}</p>
           <button
             onClick={() => BANNERS[bannerIdx].action && setScreen(BANNERS[bannerIdx].action)}
             style={{
-              background: T.white, color: T.gray900, border: 'none',
-              borderRadius: 9999, padding: '9px 24px', fontSize: 13, fontWeight: 700, cursor: 'pointer',
+              background: T.white, color: T.gray800, border: 'none',
+              borderRadius: 9999, padding: '9px 22px', fontSize: 13, fontWeight: 700,
+              cursor: 'pointer', letterSpacing: -0.1,
+              boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
             }}>{BANNERS[bannerIdx].cta}</button>
         </div>
         {/* 닷 인디케이터 */}
@@ -70,34 +72,35 @@ export default function ScreenShopping() {
       </div>
 
       {/* 상품 그리드 */}
-      <div style={{ background: T.white, padding: '14px', paddingBottom: 20 }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
-          <span style={{ fontSize: 15, fontWeight: 700, color: T.gray900 }}>추천 상품</span>
-          <span style={{ fontSize: 13, color: T.gray400 }}>전체보기 →</span>
+      <div style={{ background: T.white, padding: '16px 14px 24px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 14 }}>
+          <span style={{ fontSize: 16, fontWeight: 700, color: T.gray800, letterSpacing: -0.3 }}>추천 상품</span>
+          <span style={{ fontSize: 13, color: T.gray400, fontWeight: 500, textDecoration: 'underline', cursor: 'pointer' }}>전체보기</span>
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
           {PRODUCTS.map((p, i) => (
             <button key={i} onClick={() => setScreen('product')} style={{
-              background: T.white, border: `1px solid ${T.gray100}`, borderRadius: 12,
+              background: T.white, border: `1px solid ${T.gray100}`, borderRadius: 14,
               cursor: 'pointer', overflow: 'hidden', padding: 0, textAlign: 'left',
+              boxShadow: T.shadowCard,
             }}>
               <div style={{ height: 100, background: p.grad, position: 'relative' }}>
                 <div style={{
                   position: 'absolute', top: 8, left: 8,
-                  background: T.ocbRed, borderRadius: 4, padding: '2px 6px',
+                  background: T.ocbRed, borderRadius: 9999, padding: '3px 8px',
                 }}>
-                  <span style={{ fontSize: 11, fontWeight: 700, color: T.white }}>{p.disc} 할인</span>
+                  <span style={{ fontSize: 10, fontWeight: 700, color: T.white, letterSpacing: 0.2 }}>{p.disc} OFF</span>
                 </div>
               </div>
-              <div style={{ padding: '8px 10px 10px' }}>
-                <p style={{ fontSize: 11, color: T.gray400, margin: 0 }}>{p.brand}</p>
-                <p style={{ fontSize: 13, fontWeight: 600, color: T.gray900, margin: '2px 0', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{p.name}</p>
-                <p style={{ fontSize: 14, fontWeight: 700, color: T.ocbRed, margin: 0 }}>{p.price}</p>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 3, marginTop: 5 }}>
+              <div style={{ padding: '10px 10px 12px' }}>
+                <p style={{ fontSize: 11, color: T.gray400, fontWeight: 500, margin: 0 }}>{p.brand}</p>
+                <p style={{ fontSize: 13, fontWeight: 600, color: T.gray800, margin: '3px 0', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', letterSpacing: -0.2 }}>{p.name}</p>
+                <p style={{ fontSize: 14, fontWeight: 700, color: T.ocbRed, margin: 0, letterSpacing: -0.3 }}>{p.price}</p>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 3, marginTop: 6 }}>
                   <svg width="10" height="10" viewBox="0 0 24 24" fill="none">
-                    <polygon points="5,3 19,12 5,21" fill={T.gray400}/>
+                    <polygon points="5,3 19,12 5,21" fill={T.gray300}/>
                   </svg>
-                  <span style={{ fontSize: 11, color: T.gray500 }}>숏츠리뷰 보기</span>
+                  <span style={{ fontSize: 11, color: T.gray400, fontWeight: 500, textDecoration: 'underline' }}>숏츠리뷰 보기</span>
                 </div>
               </div>
             </button>
