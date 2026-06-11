@@ -298,7 +298,13 @@
         <div class="fg" id="field-funnel-steps" style="display:none; grid-column: 1 / -1">
           <div id="funnel-steps-preview" style="display:flex;flex-direction:column;gap:4px;padding:0;"></div>
         </div>
-        <div class="fg param-field" id="field-aid"><label>액션 ID / actn_id (선택 — 입력 시 해당 액션만 필터)</label><input type="text" id="aid" placeholder="brand_tap.brand"></div>
+        <div class="fg param-field" id="field-aid">
+          <label>액션 ID / actn_id (선택 — 입력 시 해당 액션만 필터)</label>
+          <div id="aid-list" style="display:flex;flex-direction:column;gap:6px;"></div>
+          <button type="button" onclick="addAidRow()" style="margin-top:6px;display:inline-flex;align-items:center;gap:5px;padding:5px 11px;font-size:12px;font-family:var(--sans);font-weight:500;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text2);cursor:pointer;transition:all 0.15s;" onmouseover="this.style.borderColor='#8058F7';this.style.color='#8058F7'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text2)'">
+            <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>액션 ID 추가
+          </button>
+        </div>
         <div class="fg param-field" id="field-xf"><label>연계 로그 (선택)</label><input type="text" id="xf" placeholder="platform = 'ios'"></div>
         <div class="fg param-field hidden" id="field-unit">
           <label>집계 단위</label>
@@ -764,11 +770,37 @@ function updateRangeInput() {
   }
 }
 
+function addAidRow(value) {
+  const list = document.getElementById('aid-list');
+  const row = document.createElement('div');
+  row.style.cssText = 'display:flex;gap:6px;align-items:center;';
+  row.innerHTML = `
+    <input type="text" class="aid-input" placeholder="brand_tap.brand" value="${value||''}" style="flex:1;">
+    <button type="button" onclick="removeAidRow(this)" style="flex-shrink:0;width:30px;height:34px;display:flex;align-items:center;justify-content:center;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text3);cursor:pointer;transition:all 0.15s;font-size:15px;line-height:1;" onmouseover="this.style.borderColor='var(--red)';this.style.color='var(--red)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text3)'">×</button>
+  `;
+  list.appendChild(row);
+  updateAidRemoveButtons();
+}
+
+function removeAidRow(btn) {
+  const list = document.getElementById('aid-list');
+  if (list.children.length <= 1) return;
+  btn.closest('div').remove();
+  updateAidRemoveButtons();
+}
+
+function updateAidRemoveButtons() {
+  const list = document.getElementById('aid-list');
+  const btns = list.querySelectorAll('button');
+  btns.forEach(b => b.style.visibility = list.children.length <= 1 ? 'hidden' : 'visible');
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   setQ('click', document.querySelector('.qbtn'));
   onTableChange();
   initCalSelects();
   renderCal();
+  addAidRow();
 });
 
 function genSQL(){
@@ -779,7 +811,8 @@ function genSQL(){
   const isPartition = cfg.partition || false;
   const hasPageId = cfg.hasPageId !== false;
   const raw = document.getElementById('pid').value.trim() || '/pointcon/brandall';
-  const A  = document.getElementById('aid').value.trim();
+  const aidInputs = [...document.querySelectorAll('.aid-input')].map(i=>i.value.trim()).filter(Boolean);
+  const A = aidInputs[0] || '';
   const XF = document.getElementById('xf').value.trim();
   const DF = calFrom ? calFrom.replace(/-/g,'') : 'YYYYMMDD';
   const DT = calTo   ? calTo.replace(/-/g,'')   : 'YYYYMMDD';
@@ -822,7 +855,11 @@ function genSQL(){
   let sql = '';
 
   if(qtype==='click'){
-    const aidFilter = A ? `\n        <span class="kw">AND</span> <span class="fn">LOWER</span>(<span class="fn">TRIM</span>(actn_id)) = <span class="str">'${A.toLowerCase()}'</span>` : '';
+    const aidFilter = aidInputs.length === 1
+      ? `\n        <span class="kw">AND</span> <span class="fn">LOWER</span>(<span class="fn">TRIM</span>(actn_id)) = <span class="str">'${aidInputs[0].toLowerCase()}'</span>`
+      : aidInputs.length > 1
+      ? `\n        <span class="kw">AND</span> <span class="fn">LOWER</span>(<span class="fn">TRIM</span>(actn_id)) <span class="kw">IN</span> (${aidInputs.map(a=>`<span class="str">'${a.toLowerCase()}'</span>`).join(', ')})`
+      : '';
     sql=`<span class="cm">-- click analysis: click distribution by action (by ${unit})</span>
 <span class="kw">SELECT</span>
     ${unitLabel},
